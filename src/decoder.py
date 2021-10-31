@@ -1,4 +1,5 @@
 # coding=utf-8
+import os
 import cv2
 import glob
 import json
@@ -59,11 +60,14 @@ class Decoder(object):
 if __name__ == "__main__":
     decoder = Decoder()
 
-    for img_path in glob.glob("sample/origin/*.jpg"):
+    file_patern = os.path.join("sample", "origin", "*.jpg")
+    for img_path in glob.glob(file_patern):
         print("Decode " + img_path + " ... ")
-        mosaic_path = img_path.replace("origin/", "result/mosaic_")
-        mosaic_char_path = img_path.replace("origin/", "result/mosaic_char_")
-        char_path = img_path.replace("origin/", "result/char_").replace(".jpg", ".txt")
+        # 
+        direct, img_name = os.path.split(img_path)
+        mosaic_path = os.path.join(direct.replace("origin", "result"), "mosaic_" + img_name)
+        char_path = os.path.join(direct.replace("origin", "result"), "char_" + img_name.replace(".jpg", ".txt"))
+        mosaic_char_path = os.path.join(direct.replace("origin", "result"), "mosaic_char_" + img_name)
 
         #img_path = "sample/origin/1916333840.jpg"
         mosaic, chars = decoder.decode(img_path)
