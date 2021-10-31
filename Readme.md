@@ -36,7 +36,7 @@ conda install -y pillow
 - 将jpg格式的图片放入sample/origin中
 - 运行脚本
 ```bash
-conda activate block2char
+conda activate block2charpy3
 python src/decoder.py
 ```
 - 在sample/result中可以看到:
